@@ -24,13 +24,14 @@ public class CourseAttendanceFacadeImpl implements CourseAttendanceFacade{
     public void add(CourseAttendanceDTO courseAttendanceDTO) {
         Course course=courseService.findById(courseAttendanceDTO.getCourse_id());
         Student student=studentService.findById(courseAttendanceDTO.getStudent_id());
-        CourseAttendance courseAttendance=new CourseAttendance(courseAttendanceDTO);
-        courseAttendance.setCourse(course);
-        courseAttendance.setStudent(student);
-        courseAttendance.setId(0);
-        courseAttendanceService.save(courseAttendance);
-        courseAttendanceDTO.setId(courseAttendance.getId());
-
+        if(student.getCourses().contains(course)){
+            CourseAttendance courseAttendance = new CourseAttendance(courseAttendanceDTO);
+            courseAttendance.setCourse(course);
+            courseAttendance.setStudent(student);
+            courseAttendance.setId(0);
+            courseAttendanceService.save(courseAttendance);
+            courseAttendanceDTO.setId(courseAttendance.getId());
+        }
 
     }
 

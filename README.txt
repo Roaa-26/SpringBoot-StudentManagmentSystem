@@ -73,6 +73,3 @@ To Submit Multiple Course Attendance -->> Post:http://localhost:8080/courseAtten
 To View Student Enrolled Courses -->> Get:http://localhost:8080/students/{studentId}/courses
 
 To View Assignments -->> Get:http://localhost:8080/assignments
-
-
-**Note: Assignment submission and Course attendance submission validations is not handeled

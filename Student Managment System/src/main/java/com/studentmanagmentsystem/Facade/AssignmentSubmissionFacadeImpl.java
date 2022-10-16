@@ -26,12 +26,16 @@ public class AssignmentSubmissionFacadeImpl implements AssignmentSubmissionFacad
     public void add(AssignmentSubmissionDTO assignmentSubmissionDTO) {
         Assignment assignment=assignmentService.findById(assignmentSubmissionDTO.getAssignment_id());
         Student student=studentService.findById(assignmentSubmissionDTO.getStudent_id());
-        AssignmentSubmission assignmentSubmission=new AssignmentSubmission(assignmentSubmissionDTO);
-        assignmentSubmission.setAssignment(assignment);
-        assignmentSubmission.setStudent(student);
-        assignmentSubmission.setId(0);
-        assignmentSubmissionService.save(assignmentSubmission);
-        assignmentSubmissionDTO.setId(assignmentSubmission.getId());
+        if(student.getCourses().contains(assignment.getCourse())){
+
+            AssignmentSubmission assignmentSubmission=new AssignmentSubmission(assignmentSubmissionDTO);
+            assignmentSubmission.setAssignment(assignment);
+            assignmentSubmission.setStudent(student);
+            assignmentSubmission.setId(0);
+            assignmentSubmissionService.save(assignmentSubmission);
+            assignmentSubmissionDTO.setId(assignmentSubmission.getId());
+        }
+
 
 
 
